@@ -1,0 +1,85 @@
+{
+  "list": [
+    {
+      "key": "Demo",
+      "name": "Demo",
+      "description": "Demo block of umi, with antd.",
+      "files": {
+        "index.js": "import React from 'react';\nimport { Button } from 'antd';\nimport styles from './index.less';\n\nexport default () => {\n  return <Button className={styles.container}>Hello UmiJS!</Button>;\n};\n",
+        "index.less": ".container {\n  color: blue;\n}\n"
+      },
+      "tags": [],
+      "dependencies": {
+        "antd": ">=3"
+      },
+      "peerDependencies": {
+        "umi": "3.2.3"
+      },
+      "img": "https://user-images.githubusercontent.com/13595509/77416898-7b3e7400-6dff-11ea-8887-c539e32b1a53.png",
+      "previewUrl": "",
+      "features": ["antd"],
+      "category": "Andamiaje"
+    },
+    {
+      "key": "LayoutAntdCol12",
+      "name": "Diseño en dos columnas Col 12-12",
+      "description": "Diseño en dos columnas Col 12-12",
+      "files": {
+        "index.js": "import React from 'react';\nimport { Row, Col } from 'antd';\n\nexport default () => {\n  return (\n    <Row>\n      <Col span={12} style={{ minHeight: 400, padding: 16, borderRight: '1px solid #DDD' }}>\n        INSERT_BLOCK_PLACEHOLDER:Col 12\n      </Col>\n      <Col span={12} style={{ minHeight: 400, padding: 16 }}>\n        INSERT_BLOCK_PLACEHOLDER:Col 12\n      </Col>\n    </Row>\n  );\n};\n"
+      },
+      "dependencies": {
+        "antd": ">=3"
+      },
+      "peerDependencies": {
+        "umi": "3.2.3"
+      },
+      "tags": [],
+      "img": "https://user-images.githubusercontent.com/13595509/77416923-872a3600-6dff-11ea-94eb-5755d1acff99.png",
+      "previewUrl": "",
+      "features": ["antd"],
+      "category": "diseño"
+    },
+    {
+      "key": "LayoutHolyGrail",
+      "name": "Diseño del Santo Grial",
+      "description": "Contiene capacidad de respuesta simple.",
+      "files": {
+        "index.js": "import React from 'react';\nimport styles from './index.less';\n\nexport default function() {\n  return (\n    <div className={styles.wrapper}>\n      <header>INSERT_BLOCK_PLACEHOLDER:HEADER</header>\n      <div className={styles.body}>\n        <main>INSERT_BLOCK_PLACEHOLDER:CONTENT</main>\n        <nav>INSERT_BLOCK_PLACEHOLDER:NAV</nav>\n        <aside>INSERT_BLOCK_PLACEHOLDER:ASIDE</aside>\n      </div>\n      <footer>INSERT_BLOCK_PLACEHOLDER:FOOTER</footer>\n    </div>\n  );\n}\n",
+        "index.less": ".wrapper {\n  display: flex;\n  min-height: 100vh;\n  flex-direction: column;\n\n  header,\n  footer {\n    background: #82caff;\n    flex: 0 0 6em;\n  }\n}\n\n.body {\n  display: flex;\n  flex: 1;\n  flex-direction: column;\n\n  main {\n    flex: 1;\n    background: #fecccc;\n  }\n  aside,\n  nav {\n    flex: 0 0 12em;\n    background: #c9c;\n  }\n  nav {\n    order: -1;\n  }\n}\n\n@media (min-width: 768px) {\n  .body {\n    flex-direction: row;\n  }\n}\n"
+      },
+      "dependencies": {
+        "antd": ">=3"
+      },
+      "peerDependencies": {
+        "umi": "3.2.3"
+      },
+      "tags": [],
+      "img": "https://user-images.githubusercontent.com/13595509/77416936-90b39e00-6dff-11ea-85dc-be077652b124.png",
+      "previewUrl": "",
+      "features": [],
+      "category": "diseño"
+    },
+    {
+      "key": "Table",
+      "name": "table",
+      "description": "El formulario de búsqueda básica requerida para cada proyecto.",
+      "files": {
+        "index.tsx": "import { Button, Divider, Dropdown, Form, Icon, Menu } from 'antd';\nimport React, { useState, useRef } from 'react';\nimport ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';\nimport UmiUIFlag from '@machinaai/ui-flag';\nimport { FormComponentProps } from 'antd/es/form';\nimport { TableListItem, TableListParams } from './typing.d';\n\nexport async function queryRule(params?: TableListParams) {\n  console.log(params);\n  return { data: [], success: true };\n}\n\nconst TableList: React.FC<FormComponentProps> = () => {\n  const [sorter, setSorter] = useState({});\n  const actionRef = useRef<ActionType>();\n  const columns: ProColumns<TableListItem>[] = [\n    {\n      title: 'Nombre de la regla',\n      dataIndex: 'name',\n    },\n    {\n      title: 'descripción',\n      dataIndex: 'desc',\n    },\n    {\n      title: 'Llamadas de servicio',\n      dataIndex: 'callNo',\n      sorter: true,\n      align: 'right',\n      renderText: (val: string) => `${val} k`,\n    },\n    {\n      title: 'estado',\n      dataIndex: 'status',\n      valueEnum: {\n        0: { text: 'Detenido', status: 'Default' },\n        1: { text: 'En ejeución', status: 'Processing' },\n        2: { text: 'En línea', status: 'Success' },\n        3: { text: 'Error', status: 'Error' },\n      },\n    },\n    {\n      title: 'Última actualización',\n      dataIndex: 'updatedAt',\n      sorter: true,\n      valueType: 'dateTime',\n    },\n    {\n      title: 'Running',\n      dataIndex: 'option',\n      valueType: 'option',\n      render: () => (\n        <>\n          <a>Configuración</a>\n          <Divider type=\"vertical\" />\n          <a href=\"\">Suscríbase a las alertas</a>\n        </>\n      ),\n    },\n  ];\n\n  return (\n    <ProTable<TableListItem>\n      headerTitle=\"Formulario de búsqueda\"\n      actionRef={actionRef}\n      rowKey=\"key\"\n      onChange={(_, _filter, _sorter) => {\n        setSorter(`${_sorter.field}_${_sorter.order}`);\n      }}\n      params={{\n        sorter,\n      }}\n      toolBarRender={(action, { selectedRows }) => [\n        <>\n          <UmiUIFlag />\n        </>,\n        <Button icon=\"plus\" type=\"primary\">\n          Nuevo\n        </Button>,\n        selectedRows && selectedRows.length > 0 && (\n          <Dropdown\n            overlay={\n              <Menu\n                onClick={async e => {\n                  if (e.key === 'remove') {\n                    console.log('remove');\n                    action.reload();\n                  }\n                }}\n                selectedKeys={[]}\n              >\n                <Menu.Item key=\"remove\">eliminación por lotes</Menu.Item>\n                <Menu.Item key=\"approval\">Aprobación por lotes</Menu.Item>\n              </Menu>\n            }\n          >\n            <Button>\n              Operaciones masivas <Icon type=\"down\" />\n            </Button>\n          </Dropdown>\n        ),\n      ]}\n      tableAlertRender={(selectedRowKeys, selectedRows) => (\n        <div>\n          elegido <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> articulo&nbsp;&nbsp;\n          <span>\n            Total de llamadas de servicio {selectedRows.reduce((pre, item) => pre + item.callNo, 0)} k\n          </span>\n        </div>\n      )}\n      request={params => queryRule(params)}\n      columns={columns}\n    />\n  );\n};\n\nexport default Form.create<FormComponentProps>()(TableList);\n"
+      },
+      "dependencies": {
+        "antd": ">=3",
+        "@ant-design/pro-table": "^1.0.31",
+        "@machinaai/ui-flag": "1.0.2"
+      },
+      "peerDependencies": {
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "umi": "3.2.3"
+      },
+      "tags": [],
+      "img": "https://user-images.githubusercontent.com/13595509/77416958-99a46f80-6dff-11ea-9b0f-08817d4ae178.png",
+      "previewUrl": "",
+      "features": ["antd"]
+    }
+  ]
+}

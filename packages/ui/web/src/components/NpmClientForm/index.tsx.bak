@@ -1,0 +1,52 @@
+import * as React from 'react';
+import { Select, Spin } from 'antd';
+import useNpmClients from '@/components/hooks/useNpmClients';
+
+const { Option } = Select;
+const { useState } = React;
+
+export interface INpmClientFormProps {
+  placeholder?: string;
+  loadingComponent?: React.ReactNode;
+  notFoundComponent?: React.ReactNode;
+  errorComponent?: React.ReactNode;
+  [key: string]: any;
+}
+
+const NpmClientForm: React.SFC<INpmClientFormProps> = (props = {}) => {
+  const {
+    placeholder = 'Por favor seleccione un administrador de paquetes',
+    loadingComponent = <Spin size="small" />,
+    notFoundComponent = <p>Sin administrador de paquetes</p>,
+    errorComponent = <p>Error al obtener el administrador de paquetes</p>,
+    value,
+    onChange,
+    ...restProps
+  } = props;
+  const { npmClient, error, loading } = useNpmClients();
+
+  const handleChange = vv => {
+    onChange(vv);
+  };
+
+  return (
+    <Select
+      {...restProps}
+      placeholder={placeholder}
+      value={value || npmClient[0]}
+      onChange={handleChange}
+      notFoundContent={loading ? loadingComponent : !npmClient.length && notFoundComponent}
+    >
+      {error
+        ? errorComponent
+        : Array.isArray(npmClient) &&
+          npmClient.map(client => (
+            <Option key={client} value={client}>
+              {client}
+            </Option>
+          ))}
+    </Select>
+  );
+};
+
+export default NpmClientForm;

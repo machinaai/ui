@@ -1,0 +1,42 @@
+{
+  "name": "@machinaai/plugin-ui-tasks",
+  "version": "2.1.1",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run build -- --watch\" \"CURRENT_PROJECT=example DEVELOP_MODE=1 ../umi/bin/umi.js ui\"",
+    "lint": "eslint --ext .ts,.tsx src"
+  },
+  "files": [
+    "dist",
+    "lib",
+    "src"
+  ],
+  "peerDependencies": {
+    "umi": "3.x"
+  },
+  "dependencies": {
+    "binary-mirror-config": "1.20.3",
+    "umi-webpack-bundle-analyzer": "^3.5.0"
+  },
+  "devDependencies": {
+    "@ant-design/icons": "^4.0.0-alpha.11",
+    "@machinaai/ui-types": "^2.0.0-beta.2",
+    "@umijs/fabric": "^1.1.9",
+    "antd": "^4.0.0",
+    "classnames": "^2.2.6",
+    "concurrently": "^4.1.1",
+    "eslint": "^6.1.0",
+    "filesize": "^4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/machinaai/ui",
+    "directory": "packages/plugin-ui-tasks"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "author": "ycjcl868",
+  "license": "MIT"
+}

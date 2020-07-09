@@ -1,0 +1,32 @@
+{
+  "name": "@machinaai/plugin-blocks",
+  "version": "2.1.3",
+  "main": "./lib/index.js",
+  "dependencies": {
+    "@machinaai/block-sdk": "^2.1.3"
+  },
+  "peerDependencies": {
+    "umi": "3.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/machinaai/ui",
+    "directory": "packages/plugin-blocks"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "homepage": "http://github.com/machinaai/ui/tree/master/packages/plugin-blocks",
+  "authors": [
+    "ycjcl868"
+  ],
+  "bugs": {
+    "url": "http://github.com/machinaai/ui/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "lib",
+    "dist",
+    "src"
+  ]
+}

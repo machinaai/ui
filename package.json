@@ -1,0 +1,62 @@
+{
+  "private": true,
+  "workspaces": [
+    "examples/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "cross-env DEBUG=umiui* ts-node-dev --no-notify --transpileOnly scripts/dev.ts",
+    "build": "father-build",
+    "changelog": "lerna-changelog",
+    "chore:update-deps": "sh ./scripts/reinstall_deps.sh",
+    "clean": "lerna clean -y",
+    "debug": "umi-test",
+    "doc:deploy": "rm -rf ./website/yarn.lock && cd ./website && npm run deploy && cd -",
+    "doc:dev": "cd ./website && npm run dev",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx packages",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty packages",
+    "precommit": "lint-staged",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "release": "lerna-changelog && node ./scripts/release.js",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage",
+    "ui:build": "node ./scripts/ui.js"
+  },
+  "lint-staged": {
+    "**/*.less": "stylelint --syntax less",
+    "**/*.{js,jsx,ts,tsx}": "eslint --fix --ext .js,.jsx,.ts,.tsx",
+    "**/*.{js,jsx,tsx,ts,less,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "7.3.3",
+    "@types/jest": "^24.0.5",
+    "@umijs/fabric": "^2.0.3",
+    "@umijs/test": ">3.0.0-beta.1",
+    "antd": "^4.0.0",
+    "cross-env": "^7.0.0",
+    "express": "^4.17.1",
+    "father-build": "^1.17.2",
+    "form-data": "^2.3.3",
+    "husky": "^1.2.0",
+    "lerna": "^3.6.0",
+    "lerna-changelog": "^0.8.2",
+    "lint-staged": "^8.1.0",
+    "moment": "^2.24.0",
+    "portfinder": "^1.0.24",
+    "prettier": "^1.19.1",
+    "react": "^16.8.6",
+    "react-router-dom": "5.1.2",
+    "react-test-renderer": "16.6.3",
+    "serve-handler": "^5.0.8",
+    "serve-static": "^1.13.2",
+    "shelljs": "^0.8.3",
+    "stringify-object": "^3.3.0",
+    "test-build-result": "^1.1.2",
+    "tnpm-sync": "^1.0.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "umi": "^3.1.4"
+  }
+}
